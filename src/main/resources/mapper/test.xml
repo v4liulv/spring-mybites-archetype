@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress SqlResolve -->
+<mapper namespace="com.tcfuture.web.dao.TestInfoMapper">
+    <resultMap id="BaseResultMap" type="com.tcfuture.web.domain.TestInfo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="age" jdbcType="VARCHAR" property="age" />
+        <result column="xb" jdbcType="VARCHAR" property="xb" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,age,xb
+    </sql>
+
+    <insert id="saveData" parameterType="com.tcfuture.web.domain.TestInfo" >
+        INSERT INTO test.test
+            (name,age,xb)
+        VALUES
+        (#{name,jdbcType=VARCHAR},#{age,jdbcType=INTEGER},
+         #{xb,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from test
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from test
+    </select>
+
+
+</mapper>
